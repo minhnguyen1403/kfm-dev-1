@@ -6,11 +6,9 @@ const login = {
     properties: {
         username: {
             type: 'string',
-            minLength: 6,
         },
         password: {
             type: 'string',
-            minLength: 6,
         },
     },
     required: [
@@ -50,21 +48,19 @@ const register = {
         // },
         username: {
             type: 'string',
-            lowercase: true,
-            db_unique: {
-                collection: userConstant.KF_USERS,
-                conditions: { deleted: false }
-            },
+            // db_unique: {
+            //     collection: userConstant.KF_USERS,
+            //     conditions: { deleted: false }
+            // },
         },
         password: {
             type: 'string',
-            minLength: 6,
         },
         full_name: shared.stringNotEmpty,
         
     },
     required: [
-        'user_name',
+        'username',
         'password',
         'full_name',
     ]

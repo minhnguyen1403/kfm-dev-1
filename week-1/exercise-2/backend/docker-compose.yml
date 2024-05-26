@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  kfm_mariadb:
+    container_name: kfm_mariadb
+    image: mariadb
+    ports:
+        - 3306:3306
+    environment:
+        MARIADB_USER: $MARIADB_USER
+        MARIADB_PASSWORD: $MARIADB_PASSWORD
+        MARIADB_ROOT_PASSWORD: $MARIADB_ROOT_PASSWORD
+    restart: always
+    volumes:
+      - kfm_db:/var/lib/mysql
+    networks:
+      - kfm_network
+
+  backend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: kf_users
+    ports: 
+      - "3000:3000"
+    volumes:
+      - ./config.json:/home/node/app/config.json
+      - ./nodemon.json:/home/node/app/nodemon.json
+    restart: unless-stopped
+    depends_on:
+      - kfm_mariadb
+    networks:
+      - kfm_network
+        
+volumes:
+  kfm_db:
+    name: kfm_db
+
+networks:
+  kfm_network:
+    name: kfm_network
+
+
+
