@@ -6,6 +6,8 @@ services:
     image: mariadb
     ports:
         - 3306:3306
+    env_file:
+      - .env
     environment:
         MARIADB_USER: $MARIADB_USER
         MARIADB_PASSWORD: $MARIADB_PASSWORD
@@ -20,9 +22,12 @@ services:
     build:
       context: .
       dockerfile: dockerfile
+    image: kf_image_users
     container_name: kf_users
+    env_file:
+      - ./.env
     ports: 
-      - "3000:3000"
+      - $EXPOSE_PORT:$INSIDE_PORT
     volumes:
       - ./config.json:/home/node/app/config.json
       - ./nodemon.json:/home/node/app/nodemon.json

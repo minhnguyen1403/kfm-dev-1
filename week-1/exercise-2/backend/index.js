@@ -13,6 +13,7 @@ const {
 const { clientErrorHandler, logError, renderErrorHandler } = require('./middlewares/error-handler');
 const config = (process.env.NODE_ENV !== 'localhost') ?  require('./config.json') : require('./local-config.json') ;
 
+console.log({env_node: process.env.NODE_ENV})
 if (process.env.NODE_ENV === 'production') {
   // const projectDir = path.dirname(require.main.filename);
   // const configPath = path.join(projectDir, 'config.json');
