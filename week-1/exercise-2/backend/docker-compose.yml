@@ -30,7 +30,7 @@ services:
       - $EXPOSE_PORT:$INSIDE_PORT
     volumes:
       - ./config.json:/home/node/app/config.json
-      - ./nodemon.json:/home/node/app/nodemon.json
+      - ./nodemon.dev.json:/home/node/app/nodemon.json
     restart: unless-stopped
     depends_on:
       - kfm_mariadb
