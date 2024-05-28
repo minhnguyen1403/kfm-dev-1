@@ -1,0 +1,1 @@
+The path /Users/minhnguyen/Documents/works/KFM/kfm-devops/week-1/exercise-2/nginx/nginx/nginx.conf is not shared from the host and is not known to Docker.
