@@ -1,0 +1,21 @@
+FROM node:20-alpine as imagekdbv3
+WORKDIR /app
+RUN npm install pnpm -g
+COPY package.json pnpm-lock.yaml* ./
+RUN  pnpm config set store-dir /root/.pnpm-store && pnpm i --frozen-lockfile && \
+ rm -rf /root/.cache
+
+
+FROM imagekdbv3 as builder
+WORKDIR /app
+COPY . .
+COPY --from=imagekdbv3 /app/node_modules ./node_modules
+RUN pnpm build --mode development  && pnpm i 
+
+
+FROM builder as runner
+WORKDIR /app
+FROM nginx:1.21.6-alpine
+COPY --from=runner /app/dist /usr/share/nginx/html
+EXPOSE 80
+
