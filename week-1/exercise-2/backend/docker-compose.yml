@@ -18,16 +18,14 @@ services:
     networks:
       - kfm_network
 
-  backend:
+  kf_users:
+    scale: 3
     build:
       context: .
       dockerfile: dockerfile
     image: kf_image_users
-    container_name: kf_users
     env_file:
-      - ./.env
-    ports: 
-      - $EXPOSE_PORT:$INSIDE_PORT
+      - .env
     volumes:
       - ./config.json:/home/node/app/config.json
       - ./nodemon.dev.json:/home/node/app/nodemon.json
@@ -36,14 +34,28 @@ services:
       - kfm_mariadb
     networks:
       - kfm_network
-        
+    
+  nginx:
+    image: nginx:latest
+    env_file:
+      - .env
+    ports:
+      - $PORT_NGINX_HOST:$PORT_NGINX_CONTAINER
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - kfm_mariadb
+    networks:
+      - kfm_network     
+
 volumes:
   kfm_db:
     name: kfm_db
 
 networks:
   kfm_network:
-    name: kfm_network
+    external: true
+
 
 
 
