@@ -1,24 +1,21 @@
-FROM node:20-alpine3.18 as imagekdbv3
+FROM node:20-alpine as imagekdbv3
 WORKDIR /app
-
-COPY package.json pnpm-lock.yaml* ./
 RUN npm install pnpm -g
-RUN pnpm config set store-dir /root/.pnpm-store
-RUN \
-  if [ -f pnpm-lock.yaml ]; then pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found. Install package.json file" && pnpm i; \
-  fi
-
-COPY . .
-
-RUN ./node_modules/.bin/vite build --mode development
-
-FROM nginx:alpine
-
-COPY --from=imagekdbv3 /app/dist /usr/share/nginx/html
-RUN rm -rf /app && \
+COPY package.json pnpm-lock.yaml* ./
+RUN  pnpm config set store-dir /root/.pnpm-store && pnpm i --frozen-lockfile && \
  rm -rf /root/.cache
 
+
+FROM imagekdbv3 as builder
+WORKDIR /app
+COPY . .
+COPY --from=imagekdbv3 /app/node_modules ./node_modules
+RUN pnpm build --mode development  && pnpm i 
+
+
+FROM builder as runner
+WORKDIR /app
+FROM nginx:1.21.6-alpine
+COPY --from=runner /app/dist /usr/share/nginx/html
 EXPOSE 80
 
-ENV PORT 80
