@@ -7,6 +7,7 @@ const HomeRoutes: Routes = [
         path: '',
         pathMatch: 'full',
         component: BaseLayoutComponent,
+        title: "Home",
         children: [{ path: '', component: HomeComponent }],
     },
 ];

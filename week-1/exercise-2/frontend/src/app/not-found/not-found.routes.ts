@@ -7,6 +7,7 @@ const NotFoundRoutes: Routes = [
         path: 'not-found',
         pathMatch: 'full',
         component: BaseLayoutComponent,
+        title: "Not Found",
         children: [
             {
                 path: '',
