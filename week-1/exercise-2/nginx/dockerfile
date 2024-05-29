@@ -2,6 +2,7 @@ FROM nginx:latest
 
 # Cài đặt Docker client
 RUN apt-get update && apt-get install -y docker.io
+RUN apt-get update && apt-get install -y procps
 
 # Copy script vào image
 COPY nginx-config-gen.sh /usr/local/bin/nginx-config-gen.sh
