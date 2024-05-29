@@ -5,7 +5,7 @@ import { BaseLayoutComponent } from '../../layouts/base-layout/base-layout.compo
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [BaseLayoutComponent, RouterOutlet, RouterLink, RouterLinkActive],
+    imports: [BaseLayoutComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
 })
