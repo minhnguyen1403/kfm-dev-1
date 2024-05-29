@@ -5,6 +5,7 @@ const LoginRoutes: Routes = [
     {
         path: "login",
         pathMatch: "full",
+        title: "Login",
         component: LoginComponent
     }
 ]
