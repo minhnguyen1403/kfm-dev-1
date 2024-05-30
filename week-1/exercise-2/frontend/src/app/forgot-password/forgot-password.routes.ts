@@ -5,6 +5,7 @@ const ForgotPasswordRoutes: Routes = [
     {
         path: "forgot-password",
         pathMatch: "full",
+        title: "Forgot Password",
         component: ForgotPasswordComponent,
     }
 ]

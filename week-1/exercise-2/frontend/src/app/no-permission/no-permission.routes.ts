@@ -7,6 +7,7 @@ const NoPermissionRoutes: Routes = [
         path: 'no-permission',
         pathMatch: 'full',
         component: BaseLayoutComponent,
+        title: "No Permission",
         children: [
             {
                 path: '',

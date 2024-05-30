@@ -8,6 +8,7 @@ const WelcomeRoutes: Routes = [
         path: 'welcome',
         pathMatch: 'full',
         component: BaseLayoutComponent,
+        title: 'Welcome',
         children: [
             {
                 path: '',

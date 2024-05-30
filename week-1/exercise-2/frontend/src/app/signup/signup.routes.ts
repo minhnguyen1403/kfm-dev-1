@@ -5,6 +5,7 @@ const SignUpRoutes: Routes = [
     {
         path: "signup",
         pathMatch: "full",
+        title: "Sign Up",
         component: SignupComponent
     }
 ]
