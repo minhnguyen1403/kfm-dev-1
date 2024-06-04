@@ -45,3 +45,18 @@ CREATE TABLE KDB.kf_users (
 
 ##### BE
 `localhost:3005/v1/users` GET
+
+
+### week 2
+
+
+CREATE TABLE KDB.kf_lead_boarders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    late_minute INT NOT NULL,
+    late_count INT NOT NULL
+);
+
+/v1/users/report-late POST
+/v1/users/lead-boarder GET
+name, late_minute
