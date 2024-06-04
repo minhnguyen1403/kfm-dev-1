@@ -38,9 +38,9 @@ class UserController extends BaseController{
             if(listUsers.length > 0){
                 console.log('remove')
                 const report = _.first(listUsers);
-                const { late_minute: old } = report;
+                const { late_minute: old, late_count: oldCount } = report;
                 minuteUpdate += old;
-                countMinute += 1;
+                countMinute += oldCount
                 await conn.query(`Delete from ${KF_LEADBOARDERS} where name = "${name}" `)
             }
             const record = await conn.query(`
