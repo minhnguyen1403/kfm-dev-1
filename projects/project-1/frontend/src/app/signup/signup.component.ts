@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import {
     AbstractControl,
@@ -6,12 +5,14 @@ import {
     FormGroup,
     FormSubmittedEvent,
     ReactiveFormsModule,
-    Validators
+    Validators,
+    ValueChangeEvent,
 } from '@angular/forms';
-import { } from '@angular/material/input';
+import {} from '@angular/material/input';
+import AuthService from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
-import AuthService from '../auth/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 function passwordConfirming(control: AbstractControl) {
     if (control?.value.password !== control?.value.confirmPassword) {
@@ -37,7 +38,6 @@ export class SignupComponent implements OnInit {
     signUpForm = new FormGroup(
         {
             username: new FormControl('', [Validators.required]),
-            fullName: new FormControl('', [Validators.required]),
             password: new FormControl('', [Validators.required]),
             confirmPassword: new FormControl('', [Validators.required]),
         },
@@ -58,10 +58,6 @@ export class SignupComponent implements OnInit {
         return this.signUpForm.get('username');
     }
 
-    get fullName() {
-        return this.signUpForm.get('fullName');
-    }
-
     get password() {
         return this.signUpForm.get('password');
     }
@@ -78,7 +74,7 @@ export class SignupComponent implements OnInit {
         const ob = this.authService.register({
             username: this.username?.value!,
             password: this.password?.value!,
-            full_name: this.fullName?.value!,
+            full_name: 'quan',
         });
         ob.pipe(
             catchError((error) => {
