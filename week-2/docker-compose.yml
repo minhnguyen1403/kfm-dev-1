@@ -1,0 +1,44 @@
+version: '1.0'
+
+services:
+  haproxy:
+    build:
+      context: ./haproxy
+      dockerfile: Dockerfile
+    image: haproxy
+    ports:
+      - $PORT_HAPROXY_CONTAINER:$PORT_HAPROXY_HOST
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    networks:
+      - kfm_network
+  bangphongthan:
+    build:
+      context: ./bangphongthan
+      dockerfile: Dockerfile
+    image: bangphongthan
+    ports:
+      - $PORT_BANG_PHONG_THAN_CONTAINER:$PORT_BANG_PHONG_THAN_HOST
+    networks:
+      - kfm_network
+  ditre:
+    build:
+      context: ./ditre
+      dockerfile: Dockerfile
+    image: ditre
+    ports:
+      - $PORT_DI_TRE_CONTAINER:$PORT_DI_TRE_HOST
+    networks:
+      - kfm_network
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    image: api
+    ports:
+      - $PORT_API_CONTAINER:$PORT_API_HOST
+    networks:
+      - kfm_network
+networks:
+  kfm_network:
+    external: true
