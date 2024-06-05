@@ -22,7 +22,7 @@ class UserController extends BaseController{
 
     async getLeadBoarders(req, res, next){
         try {
-            const listUsers = await conn.query(`select * from ${KF_LEADBOARDERS}`);
+            const listUsers = await conn.query(`select * from ${KF_LEADBOARDERS} ORDER BY late_minute DESC`);
             return res.json(listUsers)
         } catch (error) {
             next(error)
