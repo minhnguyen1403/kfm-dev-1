@@ -16,6 +16,10 @@ export class HeaderComponent {
         return this.authService.isAuth
     }
 
+    get userData() {
+        return this.authService.userData
+    }
+
     handleLogout() {
         this.authService.logout()
     }

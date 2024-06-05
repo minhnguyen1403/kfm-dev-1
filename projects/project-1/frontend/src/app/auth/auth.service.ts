@@ -15,7 +15,8 @@ export default class AuthService {
         this.user = this.userSubject.asObservable();
     }
 
-    public get userValue() {
+    public get userData() {
+        console.log(this.userSubject.value) 
         return this.userSubject.value;
     }
 
@@ -47,7 +48,7 @@ export default class AuthService {
 
     reportLate(minute: number) {
         return this.http.post(`http://localhost:3005/v1/users/report-late`, {
-            name: this.userSubject.value?.full_name,
+            name: this.userSubject.value?.info?.full_name,
             late_minute: minute,
         });
     }

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import AuthService from '../auth/auth.service';
 import { catchError, of } from 'rxjs';
@@ -8,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-ditre',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './ditre.component.html',
   styleUrl: './ditre.component.scss'
 })
@@ -42,7 +42,7 @@ export class DitreComponent {
             if (data instanceof HttpErrorResponse) {
                 alert(data.message);
             } else {
-                this.router.navigateByUrl('bangphongthan.localhost');
+                this.router.navigate(['/']);
             }
         });
 

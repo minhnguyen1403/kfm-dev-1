@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: kf_web
     ports:
       - 80:80
     restart: unless-stopped

@@ -6,6 +6,7 @@ import NoPermissionRoutes from './no-permission/no-permission.routes';
 import NotFoundRoutes from './not-found/not-found.routes';
 import HomeRoutes from './home/home.routes';
 import ForgotPasswordRoutes from './forgot-password/forgot-password.routes';
+import DitreRoutes from './ditre/ditre.routes';
 
 export const routes: Routes = [
     ...SignUpRoutes,
@@ -15,5 +16,6 @@ export const routes: Routes = [
     ...NotFoundRoutes,
     ...HomeRoutes,
     ...ForgotPasswordRoutes,
+    ...DitreRoutes,
     { path: '**', redirectTo: '/not-found' },
 ];
