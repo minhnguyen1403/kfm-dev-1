@@ -19,6 +19,10 @@ export default class AuthService {
         return this.userSubject.value;
     }
 
+    get isAuth() {
+        return !!localStorage.getItem('user');
+    }
+
     login(username: string, password: string) {
         return this.http
             .post<UserEntity>(`http://localhost:3005/v1/users/login`, { username, password })
@@ -41,7 +45,10 @@ export default class AuthService {
         return this.http.post(`http://localhost:3005/v1/users/register`, user);
     }
 
-    get isAuth() {
-        return !!localStorage.getItem('user');
+    reportLate(minute: number) {
+        return this.http.post(`http://localhost:3005/v1/users/report-late`, {
+            name: this.userSubject.value?.full_name,
+            late_minute: minute,
+        });
     }
 }
