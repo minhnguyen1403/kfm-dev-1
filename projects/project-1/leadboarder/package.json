@@ -13,10 +13,12 @@
   "dependencies": {
     "pinia": "^2.1.7",
     "primevue": "^3.52.0",
+    "redaxios": "^0.5.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",

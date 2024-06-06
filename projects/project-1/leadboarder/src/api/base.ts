@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "redaxios";
 
 const axiosLB = axios.create({
   baseURL: "https://api.localhost/v1/users/",

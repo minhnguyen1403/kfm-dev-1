@@ -2,7 +2,7 @@
 import Card from "primevue/card";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
-import {leaderBoardService, ILeadBoarder} from "../api/service/leaderBoardService"
+import {leaderBoardService, type ILeadBoarder} from "../api/service/leaderBoardService"
 import { defineComponent } from 'vue';
 
 export default defineComponent({
