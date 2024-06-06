@@ -26,7 +26,7 @@ export default class AuthService {
 
     login(username: string, password: string) {
         return this.http
-            .post<UserEntity>(`http://localhost:3005/v1/users/login`, { username, password })
+            .post<UserEntity>(`http://api.localhost/v1/users/login`, { username, password })
             .pipe(
                 map((user) => {
                     localStorage.setItem('user', JSON.stringify(user));
@@ -42,12 +42,12 @@ export default class AuthService {
         this.router.navigate(['/']);
     }
 
-    register(user: UserEntity) {
-        return this.http.post(`http://localhost:3005/v1/users/register`, user);
+    register(user: any) {
+        return this.http.post(`http://api.localhost/v1/users/register`, user);
     }
 
     reportLate(minute: number) {
-        return this.http.post(`http://localhost:3005/v1/users/report-late`, {
+        return this.http.post(`http://api.localhost/v1/users/report-late`, {
             name: this.userSubject.value?.info?.full_name,
             late_minute: minute,
         });

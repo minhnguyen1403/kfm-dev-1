@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 81:81
+      - 3030:80
     restart: unless-stopped
     networks:
       - kfm_network

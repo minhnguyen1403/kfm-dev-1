@@ -34,7 +34,7 @@ export default defineComponent({
        <DataTable :value="list" scrollable scrollHeight="400px" tableStyle="min-width: 50rem">
         <Column field="name" header="Tên"></Column>
         <Column field="late_minute" header="Số Phút"></Column>
-        <Column field="late_" header="Số lần"></Column>
+        <Column field="late_count" header="Số lần"></Column>
       </DataTable>
       </div>
     </div>

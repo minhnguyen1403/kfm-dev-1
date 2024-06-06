@@ -75,11 +75,9 @@ export class SignupComponent implements OnInit {
             return;
         }
         const ob = this.authService.register({
-            info: {
                 username: this.username?.value!,
                 password: this.password?.value!,
                 full_name: this.fullname?.value!,
-            }
         });
         ob.pipe(
             catchError((error) => {
