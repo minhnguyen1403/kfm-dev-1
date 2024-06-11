@@ -17,7 +17,7 @@ const addRequestId = require('express-request-id')();
 const {createNamespace} = require('cls-hooked');
 const config = (process.env.NODE_ENV !== 'localhost') ?  require('./config.json') : require('./local-config.json') ;
 const _ = require('lodash');
-
+const syslogMiddleware = require('./middlewares/logger/syslog.logger').config
 console.log({env_node: process.env.NODE_ENV})
 if (process.env.NODE_ENV === 'production') {
   // const projectDir = path.dirname(require.main.filename);
@@ -52,7 +52,8 @@ async function createApp(app, config){
   });
 
   global.syslogLogger = SysLogLogger;
-
+  //app.use(Middlewares.Logger.expressLoggerMiddleware);
+  app.use(syslogMiddleware(config.log || {}));
 
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');

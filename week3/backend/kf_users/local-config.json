@@ -8,5 +8,8 @@
         "conectionLimit": 5,
         "db": "KDB"
     },
-    "bcrypt_salt_round": 10
+    "bcrypt_salt_round": 10,
+    "log": {
+        "dirname": "./var/log"
+    }
 }
