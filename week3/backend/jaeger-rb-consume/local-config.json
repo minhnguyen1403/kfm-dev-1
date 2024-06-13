@@ -1,0 +1,12 @@
+{
+  "HOST": "103.200.23.13",
+  "PORT": "5676",
+  "USER": "consumer",
+  "PASS": "123456",
+  "QUEUE": "jaeger",
+  "EXCHANGE": "kf.jaeger",
+  "PREFETCH": 10,
+  "MAX_RETRY_COUNT": 3,
+  "COLLECTOR_HOST": "103.104.123.6",
+  "COLLECTOR_PORT": 31925
+}

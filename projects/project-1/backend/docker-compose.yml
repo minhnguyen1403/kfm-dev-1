@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     # depends_on:
     #   - kfm_mariadb
-    command: ./wait-for-db.sh && npm run dev
+    command: ./wait-for-db.sh
     networks:
       - kfm_network
 

@@ -1,0 +1,32 @@
+{
+  "name": "kf_syslog_collector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/kingfoodco/kf_syslog_collector.git"
+  },
+  "keywords": [
+    "syslog",
+    "log",
+    "log",
+    "collector"
+  ],
+  "author": "steve khong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/kingfoodco/kf_syslog_collector/issues"
+  },
+  "homepage": "https://gitlab.com/kingfoodco/kf_syslog_collector#README",
+  "dependencies": {
+    "amqp": "^0.2.7",
+    "amqplib": "^0.5.6",
+    "axios": "^1.7.2",
+    "lodash": "^4.17.21",
+    "request-promise": "^4.2.6"
+  }
+}

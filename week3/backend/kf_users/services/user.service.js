@@ -6,6 +6,25 @@ const { ObjectId } = mongoose.Types;
 const createError = require('http-errors');
 const _ = require('lodash');
 const { sign } = require('../common/jwt')
+const tracer = require('../middlewares/jaeger-handle/tracer');
+
+function makeRequestToRoles() {
+    return new Promise((resolve, reject) => {
+        const span = tracer.startSpan('kf_users_span')
+        .then(response => {
+        // Xử lý response
+            span.finish();
+            resolve(response);
+        })
+    .catch(error => {
+        // Xử lý error
+        span.setTag('error', true);
+        span.log({ 'error.message': error.message });
+        span.finish();
+        reject(error);
+    });
+    });
+}
 
 async function handleLogin({ body, res }) {
     console.log(body)

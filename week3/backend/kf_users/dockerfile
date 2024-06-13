@@ -1,16 +1,23 @@
-FROM node:18-alpine
+FROM node:18-buster
 
 WORKDIR /home/node/app
 
-COPY package*.json ./
-COPY wait-for-db.sh /home/node/app/wait-for-db.sh
-RUN chmod +x /home/node/app/wait-for-db.sh
+# Install openssh-client, syslog-ng, and other dependencies
+RUN apt-get update && apt-get install -y \
+    openssh-client \
+    syslog-ng \
+    fonts-roboto
 
+COPY ./syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
+COPY ./start.sh /home/node/app/start.sh
+RUN chmod +x /home/node/app/start.sh
+
+    
+COPY package*.json ./
 
 RUN npm install
 
 COPY . .
 
-
-
+#ENTRYPOINT ["/home/node/app/start.sh"]
 

@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const http = require('http');
+const config = (process.env.NODE_ENV !== 'localhost') ?  require('./config.json') : require('./local-config.json') ;
+global.APP_CONFIG = config;
 const Tracing = require('./middlewares/jaeger-handle/tracing')
 let app = express();
 let server = http.createServer(app);
@@ -15,9 +17,8 @@ const { clientErrorHandler, logError, renderErrorHandler } = require('./middlewa
 const { SysLogLogger } = require('./middlewares/logger/syslog.logger')
 const addRequestId = require('express-request-id')();
 const {createNamespace} = require('cls-hooked');
-const config = (process.env.NODE_ENV !== 'localhost') ?  require('./config.json') : require('./local-config.json') ;
 const _ = require('lodash');
-const syslogMiddleware = require('./middlewares/logger/syslog.logger').config
+const syslogMiddleware = require('./middlewares/logger/syslog.logger').config;
 console.log({env_node: process.env.NODE_ENV})
 if (process.env.NODE_ENV === 'production') {
   // const projectDir = path.dirname(require.main.filename);
@@ -27,7 +28,6 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   //config = _config;
 }
-global.APP_CONFIG = config;
 
 async function createApp(app, config){
   // view engine setup

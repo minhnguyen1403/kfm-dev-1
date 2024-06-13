@@ -1,0 +1,9 @@
+{
+    "port": 1234,
+    "rabbit_config": {
+        "username": "collector",
+        "password": "bDzjL28tQd8FTZgQpiAM",
+        "host": "103.104.123.6",
+        "port": 31969
+    }
+}

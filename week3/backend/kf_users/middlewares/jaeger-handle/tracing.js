@@ -29,7 +29,7 @@ function startTracing(req) {
     const method = req.method.toLowerCase()
     const name = `${method}_${resource}`;
     const parentContext = tracer.extract(FORMAT_HTTP_HEADERS, req.headers);
-
+    console.log('KF_USERS: ', parentContext)
     if (parentContext) {
         req.span = tracer.startSpan(name, { childOf: parentContext });
     } else {
@@ -38,6 +38,7 @@ function startTracing(req) {
 }
 
 function endTracing(req, res) {
+    console.log('user done roi')
     const span = req.span;
     span.finish();
     const context = span.context();
@@ -80,6 +81,7 @@ function endTracing(req, res) {
         },
         "tags": tags
     };
+    console.log('KF_USERS: ', logContent)
 
     if (context._parentId) {
         logContent.parentId = context._parentId.toString('hex');
@@ -91,7 +93,7 @@ function endTracing(req, res) {
         // add more zero up 16 long
         logContent.parentId = pad_with_zeroes(logContent.parentId, 16);
     }
-
+    //console.log(JSON.stringify(logContent))
     syslogLogger.logSpan(JSON.stringify(logContent));
 }
 

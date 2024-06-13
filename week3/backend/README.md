@@ -1,0 +1,2 @@
+syslog-ng --no-caps
+

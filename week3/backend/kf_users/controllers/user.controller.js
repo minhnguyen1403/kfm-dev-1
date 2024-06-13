@@ -8,6 +8,11 @@ const BaseController = require('./base.controller');
 const userService = require('../services/user.service');
 const { KF_USERS, KF_LEADBOARDERS } = require('../constants')
 const _ = require('lodash')
+const axios = require('axios')
+const tracer = require('../middlewares/jaeger-handle/tracer');
+const { FORMAT_HTTP_HEADERS } = require('opentracing');
+const { getNamespace } = require('cls-hooked');
+
 class UserController extends BaseController{
     static run(app) {
         app.post('/v1/users/login', validateBody(login), this.handler('login'));
@@ -18,6 +23,28 @@ class UserController extends BaseController{
 
         app.post('/v1/users/report-late', this.handler('handleReportLate'));
         app.get('/v1/users/lead-boarder', this.handler('getLeadBoarders'));
+
+        app.get('/v1/users/tracing', this.handler('tracing'));
+
+        
+    }
+
+    async tracing(req, res, next){
+        try {
+            console.log('test on ')
+            const namespace = getNamespace('request');
+            let headers = {}
+            if (namespace) {
+                const span = namespace.get('span');
+                if (span)
+                    tracer.inject(span.context(), FORMAT_HTTP_HEADERS, headers);
+            }    
+            const data = await axios.get('http://backend-kf_roles-1:3005/v1/roles', { headers })
+            console.log(data.data)
+            return res.json({})
+        } catch (error) {
+            next(error)
+        }
     }
 
     async getLeadBoarders(req, res, next){
